@@ -11,6 +11,7 @@ namespace Northwind.Configuration
     {
         public static void RegisterServices(IServiceCollection config) {
             config.AddScoped<ICategoryService, CategoryService>();
+            config.AddScoped<ISupplierService, SupplierService>();
             config.AddScoped<IProductService, ProductService>();
         }
 

@@ -6,6 +6,7 @@ using Northwind.Helpers;
 using Northwind.Models;
 using AutoMapper;
 using System.Collections.Generic;
+using Northwind.Entities;
 
 namespace Northwind.Controllers {
     [Route ("[controller]")]
@@ -45,15 +46,24 @@ namespace Northwind.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Post(ProductModel model) {
+            if (ModelState.IsValid){
+                _productService.Add(_mapper.Map<Product>(model));
+                _productService.SaveChanges();
+            }
 
-
-            return Ok();
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPut]
         public IActionResult Put(ProductModel model) {
-            return Ok();
+            if (ModelState.IsValid){
+                _productService.Add(_mapper.Map<Product>(model));
+                _productService.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

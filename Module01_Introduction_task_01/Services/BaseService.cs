@@ -14,5 +14,21 @@ namespace Northwind.Services {
         public IQueryable<T> GetAll () {
             return _repo.Query();
         }
+
+        public void Add(T entity) {
+            _repo.Add(entity);
+        }
+
+        public void Update(T entity) {
+            _repo.Update(entity);
+        }
+
+        public void Remove(T entity) {
+            _repo.Remove(entity);
+        }
+
+        public void SaveChanges() {
+            _uow.Commit();
+        }
     }
 }

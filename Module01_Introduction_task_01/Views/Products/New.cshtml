@@ -20,7 +20,7 @@
         <div class="products-table__body">
             @foreach(var product in @Model) {
                 <div class="products-table__row row">
-                    <div class="products-table__cell col-lg-2 col-md-2 col-xs-2"><a asp-page="/Products/Edit" asp-route-id="@product.ProductId">@product.ProductName</a></div>
+                    <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">@product.ProductName</div>
                     <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@product.CategoryName</div>
                     <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">@product.CompanyName</div>
                     <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@String.Format("{0:0.00}", product.UnitPrice)$</div>
