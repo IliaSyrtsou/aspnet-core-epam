@@ -31,6 +31,8 @@ namespace Northwind
             DIConfiguration.RegisterServices(services);
             DIConfiguration.RegisterRepository(services);
 
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
