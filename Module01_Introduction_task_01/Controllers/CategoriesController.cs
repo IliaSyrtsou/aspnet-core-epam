@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Module01_Introduction_task_01.Services.Interfaces;
 
@@ -11,7 +12,8 @@ namespace Module01_Introduction_task_01.Controllers {
         }
 
         public IActionResult Index () {
-            return View ();
+            var categories = this._categoriesService.GetAll().ToList();
+            return View(categories);
         }
     }
 }

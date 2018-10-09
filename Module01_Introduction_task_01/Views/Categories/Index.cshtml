@@ -1,11 +1,13 @@
-﻿@page
-@model CategoriesModel
+﻿@using Module01_Introduction_task_01.Models
+@model IList<Category>
 
 <div class="row">
-    <div class="col-md-12">
-        <h2>These are the categories available</h2>
+    <div class="col-md-12">p
+        <h2>These are the categories available:</h2>
         <ul>
-            <li>Sample pages using ASP.NET Core Razor Pages</li>
+            @foreach(var category in @Model) {
+                <li>@category.</li>
+            }
             <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
         </ul>
     </div>

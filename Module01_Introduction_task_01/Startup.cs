@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Module01_Introduction_task_01.Configuration;
+using Module01_Introduction_task_01.Context;
 
 namespace Module01_Introduction_task_01
 {
@@ -23,7 +25,11 @@ namespace Module01_Introduction_task_01
 
         public void ConfigureServices(IServiceCollection services)
         {
-            DIConfiguration.ConfigureServices(services);
+            DIConfiguration.RegisterServices(services);
+            DIConfiguration.RegisterRepository(services);
+
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
