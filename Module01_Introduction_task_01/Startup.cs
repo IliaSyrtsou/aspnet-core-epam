@@ -25,11 +25,11 @@ namespace Northwind
 
         public void ConfigureServices(IServiceCollection services)
         {
-            DIConfiguration.RegisterServices(services);
-            DIConfiguration.RegisterRepository(services);
-
             services.AddDbContext<NorthwindDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
+
+            DIConfiguration.RegisterServices(services);
+            DIConfiguration.RegisterRepository(services);
 
             services.Configure<CookiePolicyOptions>(options =>
             {

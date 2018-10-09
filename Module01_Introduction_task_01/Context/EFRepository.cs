@@ -24,7 +24,7 @@ namespace Northwind.Context {
             _dbSet.Remove(item);
         }
 
-        public IQueryable<T> Query()
+        public DbSet<T> Query()
         {
             return _dbSet;
         }

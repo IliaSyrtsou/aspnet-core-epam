@@ -1,12 +1,13 @@
-﻿@using Northwind.Models
-@model ProductsModel
+﻿@using Northwind.Entities
+@model IList<Product>
 
 <div class="row">
     <div class="col-md-12">
         <h2>These are the products available</h2>
         <ul>
-            <li>Sample pages using ASP.NET Core Razor Pages</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+            @foreach(var product in @Model) {
+                <li>@product.ProductName by @{@product.Supplier.CompanyName}(@String.Format("{0:0.00}", product.UnitPrice)$ per @product.QuantityPerUnit units). In Stock: @product.UnitsInStock. On Order: @product.UnitsOnOrder </li>
+            }
         </ul>
     </div>
 </div>
