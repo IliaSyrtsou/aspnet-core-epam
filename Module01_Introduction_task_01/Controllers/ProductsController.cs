@@ -21,10 +21,10 @@ namespace Northwind.Controllers {
             var products = this._productService.GetAll();
 
             var count = _config["Products:MaxCount"].ToNullableInt();
-            if (count != null) {
+            if (count != null && count != 0) {
                 products = products.Take(count.Value);
             }
-            
+
             return View(products.ToList());
         }
     }
