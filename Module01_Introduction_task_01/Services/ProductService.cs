@@ -11,7 +11,7 @@ namespace Northwind.Services
         public ProductService(IRepository<Product> repo, IUnitOfWork uow)
             : base(repo, uow) {}
 
-        public IQueryable<Product> GetAll() {
+        public new IQueryable<Product> GetAll() {
             return this._repo.Query()
                 .Include(x => x.Supplier)
                 .Include(x => x.Category);

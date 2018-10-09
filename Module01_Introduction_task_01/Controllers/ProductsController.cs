@@ -3,20 +3,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Northwind.Services.Interfaces;
 using Northwind.Helpers;
+using Northwind.Models;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace Northwind.Controllers {
-    [Route ("[controller]/[action]")]
+    [Route ("[controller]")]
     public class ProductsController : Controller {
         private IProductService _productService { get; set; }
         private IConfiguration _config { get; set; }
-
-        public ProductsController (
+        private IMapper _mapper { get; set; }
+        
+        
+        public ProductsController(
             IProductService productService,
-            IConfiguration config
-        ) {
+            IConfiguration config,
+            IMapper mapper) 
+        {
             this._productService = productService;
             this._config = config;
+            this._mapper = mapper;
         }
+
+        [Route("")]
+        [Route("[action]")]
         public IActionResult Index() {
             var products = this._productService.GetAll();
 
@@ -25,7 +35,25 @@ namespace Northwind.Controllers {
                 products = products.Take(count.Value);
             }
 
-            return View(products.ToList());
+            return View(_mapper.Map<IList<ProductModel>>(products.ToList()));
+        }
+
+        [Route("[action]")]
+        public IActionResult New() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Post(ProductModel model) {
+
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult Put(ProductModel model) {
+            return Ok();
         }
     }
 }

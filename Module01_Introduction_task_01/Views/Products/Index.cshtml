@@ -1,5 +1,5 @@
-﻿@using Northwind.Entities 
-@model IList<Product>
+﻿@using Northwind.Models 
+@model IList<ProductModel>
     <div class="products-table-label">
         <h2>These are the products available</h2>
     </div>
@@ -21,8 +21,8 @@
             @foreach(var product in @Model) {
                 <div class="products-table__row row">
                     <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">@product.ProductName</div>
-                    <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@product.Category.CategoryName</div>
-                    <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">@product.Supplier.CompanyName</div>
+                    <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@product.CategoryName</div>
+                    <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">@product.CompanyName</div>
                     <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@String.Format("{0:0.00}", product.UnitPrice)$</div>
                     <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@product.QuantityPerUnit</div>
                     <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">@product.UnitsInStock</div>
