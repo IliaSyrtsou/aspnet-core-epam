@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Module01_Introduction_task_01.Entities;
+using Northwind.Entities;
 
-namespace Module01_Introduction_task_01.Context {
+namespace Northwind.Context {
     public class EFRepository<T> : IRepository<T> where T : class {
         private readonly DbSet<T> _dbSet;
 

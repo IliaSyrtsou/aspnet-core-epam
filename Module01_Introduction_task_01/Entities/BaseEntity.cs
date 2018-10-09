@@ -1,4 +1,4 @@
-namespace Module01_Introduction_task_01.Entities
+namespace Northwind.Entities
 {
     public class BaseEntity
     {

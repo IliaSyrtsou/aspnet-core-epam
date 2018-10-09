@@ -1,7 +1,7 @@
 using System.Linq;
-using Module01_Introduction_task_01.Entities;
+using Northwind.Entities;
 
-namespace Module01_Introduction_task_01.Context
+namespace Northwind.Context
 {
     public interface IRepository<T>
     {

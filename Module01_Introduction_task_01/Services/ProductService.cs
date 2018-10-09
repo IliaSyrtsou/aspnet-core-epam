@@ -1,8 +1,8 @@
-using Module01_Introduction_task_01.Context;
-using Module01_Introduction_task_01.Entities;
-using Module01_Introduction_task_01.Services.Interfaces;
+using Northwind.Context;
+using Northwind.Entities;
+using Northwind.Services.Interfaces;
 
-namespace Module01_Introduction_task_01.Services
+namespace Northwind.Services
 {
     public class ProductService: BaseService<Product>, IProductService
     {

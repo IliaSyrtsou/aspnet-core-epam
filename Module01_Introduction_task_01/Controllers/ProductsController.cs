@@ -1,8 +1,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Module01_Introduction_task_01.Services.Interfaces;
+using Northwind.Services.Interfaces;
 
-namespace Module01_Introduction_task_01.Controllers
+namespace Northwind.Controllers
 {
     [Route("[controller]/[action]")]
     public class ProductsController: Controller

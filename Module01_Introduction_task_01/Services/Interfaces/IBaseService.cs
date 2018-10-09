@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Module01_Introduction_task_01.Entities;
-namespace Module01_Introduction_task_01.Services.Interfaces
+using Northwind.Entities;
+namespace Northwind.Services.Interfaces
 {
     public interface IBaseService<T> where T: BaseEntity
     {

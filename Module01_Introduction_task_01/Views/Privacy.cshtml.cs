@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Module01_Introduction_task_01.Pages
+namespace Northwind.Pages
 {
     public class PrivacyModel : PageModel
     {

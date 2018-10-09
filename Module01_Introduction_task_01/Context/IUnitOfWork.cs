@@ -1,6 +1,6 @@
 using System;
 
-namespace Module01_Introduction_task_01.Context
+namespace Northwind.Context
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Module01_Introduction_task_01.Entities {
+namespace Northwind.Entities {
     [Table("Categories")]
     public class Category : BaseEntity {
         public int CategoryId { get; set; }

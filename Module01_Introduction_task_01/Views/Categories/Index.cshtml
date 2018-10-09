@@ -1,4 +1,4 @@
-﻿@using Module01_Introduction_task_01.Models
+﻿@using Northwind.Entities
 @model IList<Category>
 
 <div class="row">
@@ -6,7 +6,7 @@
         <h2>These are the categories available:</h2>
         <ul>
             @foreach(var category in @Model) {
-                <li>@category.</li>
+                <li>@category.CategoryName</li>
             }
             <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
         </ul>

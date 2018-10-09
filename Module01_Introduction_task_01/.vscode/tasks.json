@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Module01_Introduction_task_01.csproj"
+                "${workspaceFolder}/Northwind.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

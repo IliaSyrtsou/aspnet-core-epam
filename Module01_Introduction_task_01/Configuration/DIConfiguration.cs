@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
-using Module01_Introduction_task_01.Context;
-using Module01_Introduction_task_01.Entities;
-using Module01_Introduction_task_01.Services;
-using Module01_Introduction_task_01.Services.Interfaces;
+using Northwind.Context;
+using Northwind.Entities;
+using Northwind.Services;
+using Northwind.Services.Interfaces;
 
-namespace Module01_Introduction_task_01.Configuration
+namespace Northwind.Configuration
 {
     public static class DIConfiguration
     {
@@ -14,7 +14,8 @@ namespace Module01_Introduction_task_01.Configuration
         }
 
         public static void RegisterRepository(IServiceCollection config) {
-            config.AddScoped(typeof(IRepository<>), typeof(Repository<>);
+            config.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+            config.AddScoped<IUnitOfWork, EFUnitOfWork>();
         }
     }
 }

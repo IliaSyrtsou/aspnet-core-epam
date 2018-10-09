@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Module01_Introduction_task_01.Entities;
+using Northwind.Entities;
 
-namespace Module01_Introduction_task_01.Context {
-    public class ApplicationDbContext : DbContext {
+namespace Northwind.Context {
+    public class NorthwindDbContext : DbContext {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
     }

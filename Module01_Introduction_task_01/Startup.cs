@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Module01_Introduction_task_01.Configuration;
-using Module01_Introduction_task_01.Context;
+using Northwind.Configuration;
+using Northwind.Context;
 
-namespace Module01_Introduction_task_01
+namespace Northwind
 {
     public class Startup
     {
@@ -28,7 +28,7 @@ namespace Module01_Introduction_task_01
             DIConfiguration.RegisterServices(services);
             DIConfiguration.RegisterRepository(services);
 
-            services.AddDbContext<ApplicationDbContext>(
+            services.AddDbContext<NorthwindDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
             services.Configure<CookiePolicyOptions>(options =>

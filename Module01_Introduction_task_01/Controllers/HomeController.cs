@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Module01_Introduction_task_01.Controllers
+namespace Northwind.Controllers
 {
     [Route("[controller]/[action]")]
     public class HomeController: Controller

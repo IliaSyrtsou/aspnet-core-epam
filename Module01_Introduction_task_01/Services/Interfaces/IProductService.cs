@@ -1,6 +1,6 @@
-using Module01_Introduction_task_01.Entities;
+using Northwind.Entities;
 
-namespace Module01_Introduction_task_01.Services.Interfaces
+namespace Northwind.Services.Interfaces
 {
     public interface IProductService: IBaseService<Product>
     {
