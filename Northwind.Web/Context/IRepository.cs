@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Northwind.Entities;
 
 namespace Northwind.Context {
     public interface IRepository<T> where T : class {

@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Context;
-using Northwind.Entities;
 using Northwind.Services;
 using Northwind.Services.Interfaces;
 

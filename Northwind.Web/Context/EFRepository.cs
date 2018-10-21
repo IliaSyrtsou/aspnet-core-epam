@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Northwind.Entities;
 
 namespace Northwind.Context {
     public class EFRepository<T> : IRepository<T> where T : class {
