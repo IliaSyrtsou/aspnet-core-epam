@@ -1,7 +1,7 @@
 @page "{id:int?}"
 @using Northwind.Pages.Products
 
-@model EditProductModel
+@model CreateProductModel
 <h1>Edit @Model.Product.ProductName</h1>
 
 <form method="POST">
@@ -31,7 +31,7 @@
         </select>
         <span asp-validation-for="Product.SupplierId"></span>
     </div>
-    <div class="form-field">
+        <div class="form-field">
         <label asp-for="Product.UnitPrice">Price per unit</label>
         <input asp-for="Product.UnitPrice"/>
         <span asp-validation-for="Product.UnitPrice"></span>

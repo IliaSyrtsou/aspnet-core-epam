@@ -9,21 +9,21 @@ using Northwind.Models;
 using Northwind.Services.Interfaces;
 
 namespace Northwind.Pages.Products {
-    public class EditProductModel : PageModel {
+    public class CreateProductModel : PageModel {
         private IProductService _productService { get; set; }
         private ICategoryService _categoryService { get; set; }
         private ISupplierService _supplierService { get; set; }
         private IMapper _mapper { get; set; }
 
         [BindProperty]
-        public EditProductViewModel Product { get; set; }
+        public CreateProductViewModel Product { get; set; }
 
         [BindProperty]
         public ICollection<Category> Categories { get; set; }
         [BindProperty]
         public ICollection<Supplier> Suppliers { get; set; }
 
-        public EditProductModel (
+        public CreateProductModel (
             IProductService productService,
             ICategoryService categoryService,
             ISupplierService supplierService,
@@ -35,17 +35,8 @@ namespace Northwind.Pages.Products {
             _mapper = mapper;
         }
 
-        public IActionResult OnGet (int id) {
-            if (id.Equals (-1) || id.Equals (0)) {
-                return RedirectToProductList();
-            }
-
-            Product = _mapper.Map<EditProductViewModel>(_productService.GetAll().FirstOrDefault(x => x.ProductId.Equals(id)));
-
-            if (Product == null) {
-                return RedirectToProductList();
-            }
-
+        public IActionResult OnGet () {
+            Product = new CreateProductViewModel();
             Categories = _categoryService.GetAll().ToList();
             Suppliers = _supplierService.GetAll().ToList();
 
@@ -55,11 +46,10 @@ namespace Northwind.Pages.Products {
         public IActionResult OnPost () {
             if (ModelState.IsValid) {
                 var product = _mapper.Map<Product>(Product);
-                _productService.Update(product);
+                _productService.Add(product);
                 _productService.SaveChanges ();
                 return RedirectToAction ("Index", "Products");
             }
-
             Categories = _categoryService.GetAll().ToList();
             Suppliers = _supplierService.GetAll().ToList();
     

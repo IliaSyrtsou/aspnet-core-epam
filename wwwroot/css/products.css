@@ -1,6 +1,20 @@
 .products-table {
 }
 
+.products-table-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.products-table-label__text {
+    
+}
+
+.products-table-label__button {
+    margin-top: 2%
+}
+
 .products-table div {
     text-align: left;
 }

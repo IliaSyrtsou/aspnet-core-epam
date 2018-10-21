@@ -36,34 +36,9 @@ namespace Northwind.Controllers {
                 products = products.Take(count.Value);
             }
 
-            return View(_mapper.Map<IList<ProductModel>>(products.ToList()));
-        }
-
-        [Route("[action]")]
-        public IActionResult New() {
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Post(ProductModel model) {
-            if (ModelState.IsValid){
-                _productService.Add(_mapper.Map<Product>(model));
-                _productService.SaveChanges();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPut]
-        public IActionResult Put(ProductModel model) {
-            if (ModelState.IsValid){
-                _productService.Add(_mapper.Map<Product>(model));
-                _productService.SaveChanges();
-            }
-
-            return RedirectToAction(nameof(Index));
+            var ordered = products.OrderBy(x=> x.ProductName);
+            
+            return View(_mapper.Map<IList<EditProductViewModel>>(ordered.ToList()));
         }
     }
 }
