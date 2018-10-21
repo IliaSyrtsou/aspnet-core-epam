@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Northwind.Context
+namespace Northwind.Repository
 {
     public class EFUnitOfWork : IUnitOfWork
     {

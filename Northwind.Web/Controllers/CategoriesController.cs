@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services.Interfaces;
 
-namespace Northwind.Controllers {
+namespace Northwind.Web.Controllers {
     [Route ("[controller]/[action]")]
     public class CategoriesController : Controller {
         private ICategoryService _categoriesService { get; set; }

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Northwind.Entities;
 
-namespace Northwind.Context {
+namespace Northwind.Repository {
     public class NorthwindDbContext : DbContext {
         public NorthwindDbContext(DbContextOptions options): base(options) {}
         public DbSet<Product> Products { get; set; }

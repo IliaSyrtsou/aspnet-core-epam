@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Entities;
-using Northwind.Models;
+using Northwind.Web.Models;
 using Northwind.Services.Interfaces;
 
-namespace Northwind.Pages.Products {
+namespace Northwind.Web.Pages.Products {
     public class EditProductModel : PageModel {
         private IProductService _productService { get; set; }
         private ICategoryService _categoryService { get; set; }

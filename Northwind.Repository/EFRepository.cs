@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Northwind.Context {
+namespace Northwind.Repository {
     public class EFRepository<T> : IRepository<T> where T : class {
         private readonly DbSet<T> _dbSet;
 

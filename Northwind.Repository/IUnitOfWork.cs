@@ -1,6 +1,6 @@
 using System;
 
-namespace Northwind.Context
+namespace Northwind.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

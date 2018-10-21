@@ -2,13 +2,13 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Northwind.Services.Interfaces;
-using Northwind.Helpers;
-using Northwind.Models;
+using Northwind.Web.Helpers;
+using Northwind.Web.Models;
 using AutoMapper;
 using System.Collections.Generic;
 using Northwind.Entities;
 
-namespace Northwind.Controllers {
+namespace Northwind.Web.Controllers {
     [Route ("[controller]")]
     public class ProductsController : Controller {
         private IProductService _productService { get; set; }

@@ -1,8 +1,8 @@
 using AutoMapper;
 using Northwind.Entities;
-using Northwind.Models;
+using Northwind.Web.Models;
 
-namespace Module01_Introduction_task_01.Profiles
+namespace Northwind.Web.Profiles
 {
     public class ProductProfile: Profile
     {

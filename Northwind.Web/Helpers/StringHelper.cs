@@ -1,4 +1,4 @@
-namespace Northwind.Helpers {
+namespace Northwind.Web.Helpers {
     public static class StringExtensions {
         public static int? ToNullableInt (
             this string str,

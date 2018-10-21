@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Northwind.Context;
+using Northwind.Repository;
 using Northwind.Services;
 using Northwind.Services.Interfaces;
 
-namespace Northwind.Configuration
+namespace Northwind.Web.Configuration
 {
     public static class DIConfiguration
     {

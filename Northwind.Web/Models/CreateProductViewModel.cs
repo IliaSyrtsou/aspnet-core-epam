@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Northwind.Models {
+namespace Northwind.Web.Models {
     public class CreateProductViewModel {
         public int? ProductId { get; set; }
         [Required]        

@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Northwind.Context {
+namespace Northwind.Repository {
     public interface IRepository<T> where T : class {
         void Add (T item);
         void Remove (T item);

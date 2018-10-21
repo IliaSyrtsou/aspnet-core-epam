@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Entities;
 
-namespace Module01_Introduction_task_01.Profiles
+namespace Northwind.Web.Profiles
 {
     public class SupplierProfile: Profile
     {

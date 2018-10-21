@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Northwind.Configuration;
-using Northwind.Context;
+using Northwind.Web.Configuration;
+using Northwind.Repository;
 
 namespace Northwind
 {
