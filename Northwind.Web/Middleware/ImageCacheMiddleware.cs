@@ -11,12 +11,13 @@ namespace Northwind.Web.Middleware
 {
     public class ImageCacheMiddleware
     {
-        // private ICacheProvider cacheProvider { get; set; }
-        private readonly string cacheFileNameTemplate = "image_{categoryId}.{extension}";
-        private readonly string cacheDirectory = "D:/ImageCache";
-        private readonly Regex matchRegex =
-            new Regex(@"^/images/[0-9]+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly string DefaultCacheFileNameTemplate = "image_{categoryId}.{extension}";
+        private readonly string DefaultCacheDirectory = "D:/ImageCache";
+        private string cacheFileNameTemplate;
+        private string cacheDirectory;
+        private Regex matchRegex = new Regex(@"^/images/[0-9]+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private readonly RequestDelegate _next;
+        private readonly IConfiguration _configuration;
 
         private Dictionary<string, string> cachedImages { get; set; }
 
@@ -24,6 +25,9 @@ namespace Northwind.Web.Middleware
         {
             cachedImages = new Dictionary<string, string>();
             _next = next;
+            _configuration = configuration;
+
+            Initialize();
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -41,14 +45,11 @@ namespace Northwind.Web.Middleware
 
         private async Task ProcessImageRequest(HttpContext context)
         {
-            if (IsPresentInCache(context))
+            if(!IsPresentInCache(context))
             {
-                var cachedImagePath = cachedImages.GetValueOrDefault(context.Request.Path);
-                await context.Response.SendFileAsync(cachedImagePath);
-            }
-            else
-            {
-                using(var memStream = new MemoryStream()) {
+                var originalBody = context.Response.Body;
+                using (var memStream = new MemoryStream())
+                {
                     context.Response.Body = memStream;
                     await _next(context);
                     context.Response.Body.Seek(0, SeekOrigin.Begin);
@@ -58,8 +59,11 @@ namespace Northwind.Web.Middleware
                         SaveImageToCache(context);
                     }
                 }
-                
+                context.Response.Body = originalBody;
             }
+            
+            var cachedImagePath = cachedImages.GetValueOrDefault(context.Request.Path);
+            await context.Response.SendFileAsync(cachedImagePath);
         }
 
         private bool IsPresentInCache(HttpContext context)
@@ -104,6 +108,18 @@ namespace Northwind.Web.Middleware
             File.WriteAllBytes(filePath, fileBytes);
 
             return filePath;
+        }
+
+        private void Initialize()
+        {
+            cacheFileNameTemplate = 
+                string.IsNullOrEmpty(_configuration["Cache:Image:FileStorage:FileName"]) ? 
+                DefaultCacheFileNameTemplate: 
+                _configuration["Cache:Image:FileStorage:FileName"];
+            cacheDirectory = 
+                string.IsNullOrEmpty(_configuration["Cache:Image:FileStorage:Directory"]) ?
+                    DefaultCacheDirectory: 
+                    _configuration["Cache:Image:FileStorage:Directory"];
         }
     }
 }
