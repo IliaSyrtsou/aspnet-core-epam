@@ -61,9 +61,9 @@ namespace Northwind
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            app.UseMvc();
             app.UseImageCache();
+            app.UseMvc();
+            
         }
     }
 }
