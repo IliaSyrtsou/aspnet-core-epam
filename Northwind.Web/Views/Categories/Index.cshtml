@@ -6,7 +6,7 @@
         <h2>These are the categories available:</h2>
         <ul>
             @foreach(var category in @Model) {
-                <li>@category.CategoryName</li>
+                <li><a asp-page="/Categories/Edit" asp-route-id="@category.CategoryId">@category.CategoryName</a></li>
             }
         </ul>
     </div>

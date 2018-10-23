@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Northwind.csproj"
+                "${workspaceFolder}/Northwind.Web/Northwind.Web.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

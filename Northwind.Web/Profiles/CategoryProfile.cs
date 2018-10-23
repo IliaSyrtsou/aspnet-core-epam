@@ -11,6 +11,7 @@ namespace Northwind.Web.Profiles
             CreateMap<Category, SelectListItem>()
                 .ForMember(x => x.Text, m => m.MapFrom(u => u.CategoryName))
                 .ForMember(x => x.Value, m => m.MapFrom(u => u.CategoryId));
+            CreateMap<Category, EditCategoryViewModel>();
         }
     }
 }

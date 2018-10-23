@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Northwind.Web.Configuration;
+using Northwind.Web.Middleware;
 using Northwind.Repository;
 
 namespace Northwind
@@ -62,6 +63,7 @@ namespace Northwind
             app.UseCookiePolicy();
 
             app.UseMvc();
+            app.UseImageCache();
         }
     }
 }

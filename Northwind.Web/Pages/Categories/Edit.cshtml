@@ -1,0 +1,35 @@
+@page "{id:int?}"
+@using Northwind.Web.Pages.Categories
+
+@model EditCategoryModel
+<h1>Edit @Model.CategoryModel.CategoryName</h1>
+
+    
+<form method="POST" enctype="multipart/form-data">
+    <div>
+        <input asp-for="CategoryModel.CategoryId" type="hidden" />
+        <div class="form-group">
+                <p>Upload another image for category:</p>
+                <input name="CategoryModel.Image" type="file"/>
+        </div>
+        <div class="form-field">
+            <img src="@Model.ImageLink" />
+        </div>
+        <div>
+            <div class="form-field">
+                <label asp-for="CategoryModel.CategoryName">Category Name</label>
+                <input asp-for="CategoryModel.CategoryName"/>
+                <span asp-validation-for="CategoryModel.CategoryName"></span>
+            </div>
+            <div class="form-field">
+                <label asp-for="CategoryModel.Description">Description</label>
+                <textarea asp-for="CategoryModel.Description"></textarea>
+                <span asp-validation-for="CategoryModel.Description"></span>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <input class="button-primary" type="submit" name="save" value="Save" />
+</form>
