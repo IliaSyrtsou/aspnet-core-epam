@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Northwind.Web.Configuration;
 using Northwind.Web.Middleware;
 using Northwind.Repository;
+using Northwind.Web.BackgroundTasks;
 
 namespace Northwind
 {
@@ -41,6 +42,7 @@ namespace Northwind
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             
+            services.AddHostedService<TrackMaxCachedImagesService>();
             services.AddAutoMapper();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
