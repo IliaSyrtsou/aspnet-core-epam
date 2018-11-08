@@ -23,6 +23,9 @@ namespace Northwind.Web.Pages.Categories {
         [BindProperty]
         public string ImageLink { get; set; }
 
+        [BindProperty]
+        public string ImageId {get;set;}
+
         public EditCategoryModel (
             ICategoryService categoryService,
             IMapper mapper

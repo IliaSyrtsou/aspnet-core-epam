@@ -23,7 +23,7 @@ namespace Northwind.Web.BackgroundTasks
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Timed Background Service is starting.");
+        _logger.LogInformation("Max cached-images-on-disk check is starting.");
 
         _timer = new Timer(DoWork, null, TimeSpan.Zero, 
             TimeSpan.FromMinutes(1));
@@ -32,7 +32,11 @@ namespace Northwind.Web.BackgroundTasks
     }
 
     private void DoWork(object state)
-    {
+    {   
+        int maxFilesNumber = Convert.ToInt32(
+            !String.IsNullOrEmpty(_configuration["Cache:Image:FileStorage:Directory"]) ?
+                _configuration["Cache:Image:FileStorage:Directory"] : "2");
+        
         _logger.LogInformation("Timed Background Service is working.");
     }
 
