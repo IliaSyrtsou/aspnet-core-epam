@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Core;
 using Serilog.Events;
 
 namespace Northwind
@@ -16,13 +17,12 @@ namespace Northwind
     {
         public static int Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
-
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
+                
+            ConfigureLogging(config);
             try
             {
                 Log.Information("Starting web host");
@@ -44,5 +44,30 @@ namespace Northwind
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseSerilog();
+
+
+        private static void ConfigureLogging(IConfigurationRoot config) {
+            var logTarget = config.GetValue<string>("Logging:LogTarget");
+            logTarget = string.IsNullOrEmpty(logTarget) ? "Console": logTarget;
+
+            var fileName = config.GetValue<string>("Logging:Options:Filename");
+            fileName = string.IsNullOrEmpty(fileName) ? "log.txt": fileName;
+
+            var ls = new LoggingLevelSwitch();
+            if(!config.GetValue<bool>("Logging:Enabled")) {
+                ls.MinimumLevel = ((LogEventLevel) 1 + (int) LogEventLevel.Fatal);
+            } else{
+                ls.MinimumLevel = LogEventLevel.Debug;
+            }
+            var loggerConfig = new LoggerConfiguration()
+                .MinimumLevel.ControlledBy(ls)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext();
+            loggerConfig = 
+                logTarget.ToLower().Equals("file") ? 
+                loggerConfig.WriteTo.File(fileName, rollingInterval: RollingInterval.Day) :
+                loggerConfig.WriteTo.Console();
+            Log.Logger = loggerConfig.CreateLogger();
+        }
     }
 }
