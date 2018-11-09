@@ -31,6 +31,7 @@ namespace Northwind
             services.AddDbContext<NorthwindDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
+            DIConfiguration.RegisterFilters(services);
             DIConfiguration.RegisterServices(services);
             DIConfiguration.RegisterRepository(services);
 
@@ -44,7 +45,9 @@ namespace Northwind
             
             services.AddHostedService<TrackMaxCachedImagesService>();
             services.AddAutoMapper();
-            services.AddMvc()
+            services.AddMvc(options => {
+                options.Filters.Add<LoggingActionFilter>();
+            })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

@@ -53,13 +53,12 @@ namespace Northwind
             var fileName = config.GetValue<string>("Logging:Options:Filename");
             fileName = string.IsNullOrEmpty(fileName) ? "log.txt": fileName;
 
+            var enabled = config.GetValue<bool>("Logging:Enabled");
+            var minimumLevel = config.GetValue<LogEventLevel>("Logging:LogLevel:Default");
             var ls = new LoggingLevelSwitch();
-            if(!config.GetValue<bool>("Logging:Enabled")) {
-                ls.MinimumLevel = ((LogEventLevel) 1 + (int) LogEventLevel.Fatal);
-            } else{
-                ls.MinimumLevel = LogEventLevel.Debug;
-            }
+            ls.MinimumLevel = minimumLevel;
             var loggerConfig = new LoggerConfiguration()
+                .Filter.ByExcluding(_ => !enabled)
                 .MinimumLevel.ControlledBy(ls)
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext();

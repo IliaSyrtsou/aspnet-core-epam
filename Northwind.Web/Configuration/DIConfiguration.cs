@@ -19,5 +19,9 @@ namespace Northwind.Web.Configuration
             config.AddScoped<IUnitOfWork, EFUnitOfWork>();
             config.AddScoped<DbContext, NorthwindDbContext>();
         }
+
+        public static void RegisterFilters(IServiceCollection config) {
+            config.AddScoped<LoggingActionFilter>();
+        }
     }
 }
