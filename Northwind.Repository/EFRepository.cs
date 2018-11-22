@@ -13,7 +13,7 @@ namespace Northwind.Repository {
         }
 
         public void Add (T item) {
-            _dbSet.Add(item);
+           var x = _dbSet.Add(item);//Attach(item);
         }
 
         public void Remove (T item) {

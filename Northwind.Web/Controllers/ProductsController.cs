@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Northwind.Entities;
 
 namespace Northwind.Web.Controllers {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route ("[controller]")]
     public class ProductsController : Controller {
         private IProductService _productService { get; set; }
@@ -25,7 +26,8 @@ namespace Northwind.Web.Controllers {
             this._config = config;
             this._mapper = mapper;
         }
-
+        
+        [HttpGet]
         [Route("")]
         [Route("[action]")]
         public IActionResult Index() {

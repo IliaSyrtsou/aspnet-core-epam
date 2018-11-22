@@ -16,6 +16,8 @@ namespace Northwind.Web.Controllers {
             this._categoriesService = categoryService;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [HttpGet]
         public IActionResult Index () {
             var categories = this._categoriesService.GetAll().ToList();
             return View(categories);

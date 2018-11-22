@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Entities;
 using Northwind.Web.Models;
+using Northwind.Web.Models.Api;
 
 namespace Northwind.Web.Profiles
 {
@@ -12,6 +13,7 @@ namespace Northwind.Web.Profiles
                 .ForMember(x => x.Text, m => m.MapFrom(u => u.CategoryName))
                 .ForMember(x => x.Value, m => m.MapFrom(u => u.CategoryId));
             CreateMap<Category, EditCategoryViewModel>();
+            CreateMap<Category, CategoryModel>();
         }
     }
 }

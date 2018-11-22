@@ -15,6 +15,7 @@ using Northwind.Web.Configuration;
 using Northwind.Web.Middleware;
 using Northwind.Repository;
 using Northwind.Web.BackgroundTasks;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Northwind
 {
@@ -47,8 +48,10 @@ namespace Northwind
             services.AddAutoMapper();
             services.AddMvc(options => {
                 options.Filters.Add<LoggingActionFilter>();
-            })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            SwaggerConfiguration.AddSwaggerGen(services);
+            
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -67,6 +70,7 @@ namespace Northwind
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseImageCache();
+            SwaggerConfiguration.UseSwagger(app);
             app.UseMvc();
             
         }
