@@ -14,7 +14,8 @@ namespace Northwind.Services
         public new IQueryable<Product> GetAll() {
             return this._repo.Query()
                 .Include(x => x.Supplier)
-                .Include(x => x.Category);
+                .Include(x => x.Category)
+                .Where(x => x.IsDeleted.Value != true);
         }
     }
 }

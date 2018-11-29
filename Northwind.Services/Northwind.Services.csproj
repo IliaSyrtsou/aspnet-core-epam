@@ -5,6 +5,7 @@
   <ItemGroup>
       <ProjectReference Include="../Northwind.Entities/Northwind.Entities.csproj" />
       <ProjectReference Include="../Northwind.Repository/Northwind.Repository.csproj" />
+      <ProjectReference Include="../Northwind.Common/Northwind.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="automapper" Version="7.0.1" />

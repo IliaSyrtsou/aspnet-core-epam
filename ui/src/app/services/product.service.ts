@@ -1,0 +1,25 @@
+import { Http, RequestOptionsArgs } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { ApiEndpoints } from '../constants/api-endpoints';
+import { map } from 'rxjs/operators';
+import { Product } from '../models/product';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class ProductService {
+  constructor(private readonly http: Http) {
+
+  }
+
+  public getPagedProducts(pageNumber: number, pageSize: number): Observable<Product[]> {
+    const options: RequestOptionsArgs = {
+      params: {
+        pageNumber: pageNumber,
+        pageSize: pageSize
+      }
+    };
+    return this.http
+      .get(ApiEndpoints.Product.GetPaged, options)
+      .pipe(map(response => response.json()));
+  }
+}

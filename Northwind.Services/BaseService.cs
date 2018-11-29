@@ -12,7 +12,7 @@ namespace Northwind.Services {
             this._uow = uow;
         }
         public IQueryable<T> GetAll () {
-            return _repo.Query();
+            return _repo.Query().Where(t => t.IsDeleted.Value != true);
         }
 
         public void Add(T entity) {
@@ -24,7 +24,8 @@ namespace Northwind.Services {
         }
 
         public void Remove(T entity) {
-            _repo.Remove(entity);
+            entity.IsDeleted = true;
+            _repo.Update(entity);
         }
 
         public void SaveChanges() {

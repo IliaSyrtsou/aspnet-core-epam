@@ -13,7 +13,8 @@ namespace Northwind.Web.Profiles
                 .ForMember(x => x.CategoryId, m => m.MapFrom(u => u.Category.CategoryId))
                 .ForMember(x => x.CompanyName, m => m.MapFrom(u => u.Supplier.CompanyName))
                 .ForMember(x => x.SupplierId, m => m.MapFrom(u => u.Supplier.SupplierId));
-            CreateMap<CreateProductViewModel, Product>();
+            CreateMap<CreateProductViewModel, Product>()
+                .ForMember(x => x.IsDeleted, m => m.UseValue(false));
             CreateMap<Product, EditProductViewModel>()
                 .ForMember(x => x.CategoryName, m => m.MapFrom(u => u.Category.CategoryName))
                 .ForMember(x => x.CategoryId, m => m.MapFrom(u => u.Category.CategoryId))
@@ -23,6 +24,9 @@ namespace Northwind.Web.Profiles
             CreateMap<Product, ProductModel>()
                 .ForMember(x => x.SupplierName, m => m.MapFrom(u => u.Supplier.CompanyName))
                 .ForMember(x => x.CategoryName, m => m.MapFrom(u => u.Category.CategoryName));
+            CreateMap<ProductModel, Product>();
+            CreateMap<CreateProductModel, Product>()
+                .ForMember(x => x.IsDeleted, m => m.UseValue(false));
         }
     }
 }

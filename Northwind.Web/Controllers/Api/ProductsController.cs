@@ -4,6 +4,8 @@ using Northwind.Web.Models.Api;
 using Northwind.Services.Interfaces;
 using System.Linq;
 using Northwind.Entities;
+using System.Collections.Generic;
+using Northwind.Web.Helpers;
 
 namespace Northwind.Web.Controllers.Api
 {
@@ -21,9 +23,8 @@ namespace Northwind.Web.Controllers.Api
             _mapper = mapper;
         }
 
-        [HttpGet]
-        [Route("")]
-        public ActionResult<ProductModel> GetPaged([FromQuery] QueryObject queryObject) {
+        [HttpGet("")]
+        public IActionResult GetPaged([FromQuery] QueryObject queryObject) {
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
@@ -34,14 +35,13 @@ namespace Northwind.Web.Controllers.Api
                 .Skip((queryObject.PageNumber.Value - 1) * queryObject.PageSize.Value)
                 .Take(queryObject.PageSize.Value);
 
-            return _mapper.Map<ProductModel>(productsPaged.ToList());
+            return Ok(_mapper.Map<IEnumerable<ProductModel>>(productsPaged.ToList()));
         }
 
-        [HttpGet]
-        [Route("{productId}")]
+        [HttpGet("{productId}")]
         public ActionResult<ProductModel> Get(int? productId) {
             if (!productId.HasValue){
-                ModelState.AddModelError(string.Empty, "ProductId is required");
+                ModelState.AddModelError("ProductId", "ProductId is required");
                 return BadRequest(ModelState);
             }
 
@@ -49,19 +49,18 @@ namespace Northwind.Web.Controllers.Api
                 .GetAll()
                 .FirstOrDefault(x => x.ProductId.Equals(productId));
 
-            if (product.Equals(null)) {
-                ModelState.AddModelError(string.Empty, $"Product not found with id={productId}");
-                return NotFound(ModelState);
+            if (product == null) {
+                ModelState.AddModelError("ProductId", $"Product not found with id={productId}");
+                return NotFound(ModelStateHelper.ToJson(ModelState));
             }
 
             return _mapper.Map<ProductModel>(product);
         }
 
-        [HttpPut]
-        [Route("{productId}")]
+        [HttpPut("{productId}")]
         public ActionResult<ProductModel> Update(int? productId, [FromBody] ProductModel updatedProduct) {
             if (!productId.HasValue){
-                ModelState.AddModelError(string.Empty, "ProductId is required");
+                ModelState.AddModelError("ProductId", "ProductId is required");
                 return BadRequest(ModelState);
             }
             if (!ModelState.IsValid) {
@@ -70,17 +69,17 @@ namespace Northwind.Web.Controllers.Api
 
             var exists = this._productService.GetAll().Any(x => x.ProductId.Equals(productId));
             if (!exists) {
-                ModelState.AddModelError(string.Empty, $"Product not found with id={productId.Value}");
+                ModelState.AddModelError("ProductId", $"Product not found with id={productId.Value}");
                 return NotFound(ModelState);
             }
             
             _productService.Update(_mapper.Map<Product>(updatedProduct));
+            _productService.SaveChanges();
 
             return updatedProduct;
         }
 
-        [HttpPost]
-        [Route("{productId}")]
+        [HttpPost("")]
         public ActionResult<int> Create([FromBody] CreateProductModel newProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -88,25 +87,27 @@ namespace Northwind.Web.Controllers.Api
             
             var product = _mapper.Map<Product>(newProduct);
             _productService.Add(product);
+            _productService.SaveChanges();
 
             return product.ProductId;
         }
 
-        [HttpDelete]
-        [Route("{productId}")]
-        public ActionResult Create(int? productId) {
+        [HttpDelete("{productId}")]
+        public ActionResult Delete(int? productId) {
+
             if (!productId.HasValue){
-                ModelState.AddModelError(string.Empty, "ProductId is required");
+                ModelState.AddModelError("ProductId", "ProductId is required");
                 return BadRequest(ModelState);
             }
 
             var product = this._productService.GetAll().FirstOrDefault(x => x.ProductId.Equals(productId));
             if (product.Equals(null)) {
-                ModelState.AddModelError(string.Empty, $"Product not found with id={productId.Value}");
+                ModelState.AddModelError("ProductId", $"Product not found with id={productId.Value}");
                 return NotFound(ModelState);
             }
             
             _productService.Remove(product);
+            _productService.SaveChanges();
 
             return Ok();
         }

@@ -4,6 +4,6 @@ namespace Northwind.Services.Interfaces
 {
     public interface ICategoryService: IBaseService<Category>
     {
-         
+        void UpdateCategoryImage(int categoryId, byte[] image);
     }
 }

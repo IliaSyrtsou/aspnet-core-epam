@@ -65,7 +65,8 @@ namespace Northwind
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

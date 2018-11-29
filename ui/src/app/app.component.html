@@ -1,0 +1,51 @@
+<div class="container body-content">
+    <h1>
+      Available products:
+    </h1>
+    <div class="products-table">
+        <div class="products-table__heading">
+            <div class="products-table__row row">
+                <div class="products-table__header col-lg-2 col-md-2 col-xs-2">Name</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">Category</div>
+                <div class="products-table__header col-lg-2 col-md-2 col-xs-2">Company</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">Price</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">Quantity</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">In Stock</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">On Order</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">R.Level</div>
+                <div class="products-table__header col-lg-1 col-md-1 col-xs-1">Discontinued</div>
+            </div>
+        </div>
+        <div class="products-table__body">
+            <div *ngFor="let product of products" class="products-table__row row">
+                <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">{{product.productName}}</div>
+                <div class="products-table__cell col-lg-2 col-md-2 col-xs-2">{{product.categoryName}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.supplierName}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.unitPrice | number:'1.0-2'}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.quantityPerUnit}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.unitsInStock}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.unitsOnOrder}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.reorderLevel}}</div>
+                <div class="products-table__cell col-lg-1 col-md-1 col-xs-1">{{product.discontinued}}</div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h1>
+        Available categories:
+    </h1>
+    <div class="products-table">
+        <div class="products-table__heading">
+            <div class="products-table__row row">
+                <div class="products-table__header col-lg-5 col-md-5 col-xs-5">Name</div>
+                <div class="products-table__header col-lg-6 col-md-6 col-xs-6">Description</div>
+            </div>
+        </div>
+        <div class="products-table__body">
+            <div *ngFor="let category of categories" class="products-table__row row">
+                <div class="products-table__cell col-lg-5 col-md-5 col-xs-5">{{category.categoryName}}</div>
+                <div class="products-table__cell col-lg-6 col-md-6 col-xs-6">{{category.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>

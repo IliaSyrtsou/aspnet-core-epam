@@ -5,7 +5,6 @@ namespace Northwind.Web.Models.Api
 {
     public class CreateProductModel
     {
-        public int? ProductId { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]
