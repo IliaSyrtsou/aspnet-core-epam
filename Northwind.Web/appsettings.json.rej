@@ -1,0 +1,16 @@
+diff a/Northwind.Web/appsettings.json b/Northwind.Web/appsettings.json	(rejected hunks)
+@@ -9,14 +9,6 @@
+  
+  namespace IPMS.IPM.UsersManagement.Data.EF6
+  {
+-   "Logging": {
+-     "Enabled": true,
+-     "LogLevel": {
+-       "Default": "Debug"
+-     },
+-     "LogTarget": "File",
+-     "Options": {
+-       "FileName": "log.txt"
+      public class UsersManagementServiceUnitOfWorkFactory : IUnitOfWorkFactory<IUnitOfWork>
+      {
+          private readonly string _connectionString;

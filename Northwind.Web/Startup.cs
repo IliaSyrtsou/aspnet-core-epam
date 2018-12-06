@@ -15,17 +15,22 @@ using Northwind.Web.Configuration;
 using Northwind.Web.Middleware;
 using Northwind.Repository;
 using Northwind.Web.BackgroundTasks;
+using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Logging;
 
 namespace Northwind
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,
+                        ILogger logger)
         {
             Configuration = configuration;
+            Logger = logger;
         }
         public IConfiguration Configuration { get; }
+        public ILogger Logger { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -38,6 +43,7 @@ namespace Northwind
 
             services.AddSingleton<IConfiguration>(Configuration);
 
+            SmtpClientConfiguration.ConfigureSmtpClient(services, Configuration, Logger);
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -46,12 +52,14 @@ namespace Northwind
             
             services.AddHostedService<TrackMaxCachedImagesService>();
             services.AddAutoMapper();
+            IdentityConfiguration.ConfigureIdentity(services);
+            
             services.AddMvc(options => {
                 options.Filters.Add<LoggingActionFilter>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             SwaggerConfiguration.AddSwaggerGen(services);
-            
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

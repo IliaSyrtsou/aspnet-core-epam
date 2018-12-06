@@ -1,0 +1,147 @@
+2018-11-09 16:52:49.616 +03:00 [INF] Starting web host
+2018-11-09 16:52:50.168 +03:00 [INF] User profile is available. Using 'C:\Users\Ilia_Syrtsou\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-09 16:52:50.315 +03:00 [INF] TrackMaxCachedImagesService is initializing...
+2018-11-09 16:52:50.315 +03:00 [INF] ...Done.
+2018-11-09 16:52:50.316 +03:00 [INF] Max cached files check started.
+2018-11-09 16:52:50.319 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:52:52.461 +03:00 [INF] TrackMaxCachedImagesService is stopping...
+2018-11-09 16:54:00.482 +03:00 [INF] User profile is available. Using 'C:\Users\Ilia_Syrtsou\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-09 16:54:01.249 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/  
+2018-11-09 16:54:01.383 +03:00 [INF] Request finished in 135.37ms 404 
+2018-11-09 16:54:15.100 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/Products  
+2018-11-09 16:54:15.120 +03:00 [INF] Route matched with {action = "Index", controller = "Products", page = ""}. Executing action Northwind.Web.Controllers.ProductsController.Index (Northwind.Web)
+2018-11-09 16:54:15.290 +03:00 [WRN] No type was specified for the decimal column 'UnitPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'.
+2018-11-09 16:54:15.332 +03:00 [INF] Entity Framework Core 2.1.4-rtm-31024 initialized 'NorthwindDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2018-11-09 16:54:17.418 +03:00 [INF] Executing action method Northwind.Web.Controllers.ProductsController.Index (Northwind.Web) - Validation state: "Valid"
+2018-11-09 16:54:17.457 +03:00 [WRN] Query: '(from Product <generated>_2 in DbSet<Product> select [<generated>_2]).Take(__p_0)' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results.
+2018-11-09 16:54:18.440 +03:00 [INF] Executed DbCommand (89ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[ProductId], [t].[CategoryId], [t].[Discontinued], [t].[ProductName], [t].[QuantityPerUnit], [t].[ReorderLevel], [t].[SupplierId], [t].[UnitPrice], [t].[UnitsInStock], [t].[UnitsOnOrder], [x.Category].[CategoryId], [x.Category].[CategoryName], [x.Category].[Description], [x.Category].[Picture], [x.Supplier].[SupplierId], [x.Supplier].[Address], [x.Supplier].[City], [x.Supplier].[CompanyName], [x.Supplier].[ContactName], [x.Supplier].[ContactTitle], [x.Supplier].[Country], [x.Supplier].[Fax], [x.Supplier].[HomePage], [x.Supplier].[Phone], [x.Supplier].[PostalCode], [x.Supplier].[Region]
+FROM (
+    SELECT TOP(@__p_0) [p].[ProductId], [p].[CategoryId], [p].[Discontinued], [p].[ProductName], [p].[QuantityPerUnit], [p].[ReorderLevel], [p].[SupplierId], [p].[UnitPrice], [p].[UnitsInStock], [p].[UnitsOnOrder]
+    FROM [Products] AS [p]
+) AS [t]
+INNER JOIN [Categories] AS [x.Category] ON [t].[CategoryId] = [x.Category].[CategoryId]
+INNER JOIN [Suppliers] AS [x.Supplier] ON [t].[SupplierId] = [x.Supplier].[SupplierId]
+ORDER BY [t].[ProductName]
+2018-11-09 16:54:19.316 +03:00 [INF] Executed action method Northwind.Web.Controllers.ProductsController.Index (Northwind.Web), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1889.0997ms.
+2018-11-09 16:54:19.800 +03:00 [INF] Executing ViewResult, running view Index.
+2018-11-09 16:54:19.932 +03:00 [INF] Executed ViewResult - view Index executed in 143.3323ms.
+2018-11-09 16:54:19.932 +03:00 [INF] Executed action Northwind.Web.Controllers.ProductsController.Index (Northwind.Web) in 4811.5707ms
+2018-11-09 16:54:19.938 +03:00 [INF] Request finished in 4837.1972ms 200 text/html; charset=utf-8
+2018-11-09 16:54:19.950 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.css  
+2018-11-09 16:54:19.995 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/css/site.css  
+2018-11-09 16:54:19.995 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/js/bootstrap.js  
+2018-11-09 16:54:19.998 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/css/products.css  
+2018-11-09 16:54:19.999 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/js/site.js?v=dLGP40S79Xnx6GqUthRF6NWvjvhQ1nOvdVSwaNcgG18  
+2018-11-09 16:54:20.000 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js  
+2018-11-09 16:54:20.001 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\js\site.js'
+2018-11-09 16:54:20.001 +03:00 [INF] Request finished in 1.7071ms 200 application/javascript
+2018-11-09 16:54:20.003 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/jquery/dist/jquery.js  
+2018-11-09 16:54:20.016 +03:00 [INF] Sending file. Request path: '/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js'
+2018-11-09 16:54:20.016 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\css\site.css'
+2018-11-09 16:54:20.016 +03:00 [INF] Sending file. Request path: '/css/products.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\css\products.css'
+2018-11-09 16:54:20.018 +03:00 [INF] Request finished in 20.1467ms 200 text/css
+2018-11-09 16:54:20.018 +03:00 [INF] Request finished in 23.5008ms 200 text/css
+2018-11-09 16:54:20.018 +03:00 [INF] Request finished in 17.7861ms 200 application/javascript
+2018-11-09 16:54:20.029 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2018-11-09 16:54:20.029 +03:00 [INF] Request finished in 34.8282ms 200 application/javascript
+2018-11-09 16:54:20.033 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.css'
+2018-11-09 16:54:20.033 +03:00 [INF] Request finished in 83.2306ms 200 text/css
+2018-11-09 16:54:20.034 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/robots.txt  
+2018-11-09 16:54:20.035 +03:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\jquery\dist\jquery.js'
+2018-11-09 16:54:20.035 +03:00 [INF] Request finished in 31.9495ms 200 application/javascript
+2018-11-09 16:54:20.035 +03:00 [INF] Request finished in 0.7163ms 404 
+2018-11-09 16:54:25.089 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/js/bootstrap.js  
+2018-11-09 16:54:25.089 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/js/site.js?v=dLGP40S79Xnx6GqUthRF6NWvjvhQ1nOvdVSwaNcgG18  
+2018-11-09 16:54:25.090 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\js\site.js'
+2018-11-09 16:54:25.091 +03:00 [INF] Request finished in 1.7431ms 200 application/javascript
+2018-11-09 16:54:25.091 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2018-11-09 16:54:25.091 +03:00 [INF] Request finished in 2.3042ms 200 application/javascript
+2018-11-09 16:55:24.526 +03:00 [INF] Starting web host
+2018-11-09 16:55:25.587 +03:00 [INF] User profile is available. Using 'C:\Users\Ilia_Syrtsou\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-09 16:55:25.857 +03:00 [INF] TrackMaxCachedImagesService is initializing...
+2018-11-09 16:55:25.857 +03:00 [INF] ...Done.
+2018-11-09 16:55:25.866 +03:00 [INF] Max cached files check started.
+2018-11-09 16:55:25.871 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:55:26.296 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/  
+2018-11-09 16:55:26.435 +03:00 [INF] Request finished in 140.2187ms 404 
+2018-11-09 16:55:55.868 +03:00 [INF] Max cached files check started.
+2018-11-09 16:55:55.868 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:56:25.863 +03:00 [INF] Max cached files check started.
+2018-11-09 16:56:25.864 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:56:55.867 +03:00 [INF] Max cached files check started.
+2018-11-09 16:56:55.867 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:57:25.869 +03:00 [INF] Max cached files check started.
+2018-11-09 16:57:25.870 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:57:55.868 +03:00 [INF] Max cached files check started.
+2018-11-09 16:57:55.868 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:58:25.865 +03:00 [INF] Max cached files check started.
+2018-11-09 16:58:25.866 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:58:55.863 +03:00 [INF] Max cached files check started.
+2018-11-09 16:58:55.864 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:59:25.870 +03:00 [INF] Max cached files check started.
+2018-11-09 16:59:25.870 +03:00 [INF] Max cached files check finished.
+2018-11-09 16:59:55.866 +03:00 [INF] Max cached files check started.
+2018-11-09 16:59:55.867 +03:00 [INF] Max cached files check finished.
+2018-11-09 17:00:25.868 +03:00 [INF] Max cached files check started.
+2018-11-09 17:00:25.869 +03:00 [INF] Max cached files check finished.
+2018-11-09 17:00:55.864 +03:00 [INF] Max cached files check started.
+2018-11-09 17:00:55.864 +03:00 [INF] Max cached files check finished.
+2018-11-09 17:01:25.871 +03:00 [INF] Max cached files check started.
+2018-11-09 17:01:25.872 +03:00 [INF] Max cached files check finished.
+2018-11-09 17:01:26.772 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/Products  
+2018-11-09 17:01:26.820 +03:00 [INF] Route matched with {action = "Index", controller = "Products", page = ""}. Executing action Northwind.Web.Controllers.ProductsController.Index (Northwind.Web)
+2018-11-09 17:01:27.201 +03:00 [WRN] No type was specified for the decimal column 'UnitPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'.
+2018-11-09 17:01:27.269 +03:00 [INF] Entity Framework Core 2.1.4-rtm-31024 initialized 'NorthwindDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2018-11-09 17:01:38.668 +03:00 [DBG] START: Northwind.Web.Controllers.ProductsController.Index (Northwind.Web)
+2018-11-09 17:01:38.676 +03:00 [INF] Executing action method Northwind.Web.Controllers.ProductsController.Index (Northwind.Web) - Validation state: "Valid"
+2018-11-09 17:01:38.762 +03:00 [WRN] Query: '(from Product <generated>_2 in DbSet<Product> select [<generated>_2]).Take(__p_0)' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results.
+2018-11-09 17:01:39.939 +03:00 [INF] Executed DbCommand (94ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[ProductId], [t].[CategoryId], [t].[Discontinued], [t].[ProductName], [t].[QuantityPerUnit], [t].[ReorderLevel], [t].[SupplierId], [t].[UnitPrice], [t].[UnitsInStock], [t].[UnitsOnOrder], [x.Category].[CategoryId], [x.Category].[CategoryName], [x.Category].[Description], [x.Category].[Picture], [x.Supplier].[SupplierId], [x.Supplier].[Address], [x.Supplier].[City], [x.Supplier].[CompanyName], [x.Supplier].[ContactName], [x.Supplier].[ContactTitle], [x.Supplier].[Country], [x.Supplier].[Fax], [x.Supplier].[HomePage], [x.Supplier].[Phone], [x.Supplier].[PostalCode], [x.Supplier].[Region]
+FROM (
+    SELECT TOP(@__p_0) [p].[ProductId], [p].[CategoryId], [p].[Discontinued], [p].[ProductName], [p].[QuantityPerUnit], [p].[ReorderLevel], [p].[SupplierId], [p].[UnitPrice], [p].[UnitsInStock], [p].[UnitsOnOrder]
+    FROM [Products] AS [p]
+) AS [t]
+INNER JOIN [Categories] AS [x.Category] ON [t].[CategoryId] = [x.Category].[CategoryId]
+INNER JOIN [Suppliers] AS [x.Supplier] ON [t].[SupplierId] = [x.Supplier].[SupplierId]
+ORDER BY [t].[ProductName]
+2018-11-09 17:01:40.726 +03:00 [INF] Executed action method Northwind.Web.Controllers.ProductsController.Index (Northwind.Web), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2041.0861ms.
+2018-11-09 17:01:40.727 +03:00 [DBG] FINISH: Northwind.Web.Controllers.ProductsController.Index (Northwind.Web)
+2018-11-09 17:01:40.802 +03:00 [INF] Executing ViewResult, running view Index.
+2018-11-09 17:01:41.005 +03:00 [INF] Executed ViewResult - view Index executed in 258.4971ms.
+2018-11-09 17:01:41.006 +03:00 [INF] Executed action Northwind.Web.Controllers.ProductsController.Index (Northwind.Web) in 14185.5238ms
+2018-11-09 17:01:41.015 +03:00 [INF] Request finished in 14243.7134ms 200 text/html; charset=utf-8
+2018-11-09 17:01:41.087 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.css  
+2018-11-09 17:01:41.183 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/jquery/dist/jquery.js  
+2018-11-09 17:01:41.183 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/css/site.css  
+2018-11-09 17:01:41.184 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/css/products.css  
+2018-11-09 17:01:41.184 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/js/bootstrap.js  
+2018-11-09 17:01:41.204 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\css\site.css'
+2018-11-09 17:01:41.204 +03:00 [INF] Sending file. Request path: '/css/products.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\css\products.css'
+2018-11-09 17:01:41.206 +03:00 [INF] Request finished in 22.9526ms 200 text/css
+2018-11-09 17:01:41.206 +03:00 [INF] Request finished in 22.2266ms 200 text/css
+2018-11-09 17:01:41.213 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js  
+2018-11-09 17:01:41.213 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/js/site.js?v=dLGP40S79Xnx6GqUthRF6NWvjvhQ1nOvdVSwaNcgG18  
+2018-11-09 17:01:41.214 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\js\site.js'
+2018-11-09 17:01:41.215 +03:00 [INF] Request finished in 1.9495ms 200 application/javascript
+2018-11-09 17:01:41.215 +03:00 [INF] Sending file. Request path: '/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js'
+2018-11-09 17:01:41.215 +03:00 [INF] Request finished in 2.1116ms 200 application/javascript
+2018-11-09 17:01:41.223 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2018-11-09 17:01:41.223 +03:00 [INF] Request finished in 39.1032ms 200 application/javascript
+2018-11-09 17:01:41.225 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.css'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.css'
+2018-11-09 17:01:41.225 +03:00 [INF] Request finished in 138.6128ms 200 text/css
+2018-11-09 17:01:41.236 +03:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\jquery\dist\jquery.js'
+2018-11-09 17:01:41.236 +03:00 [INF] Request finished in 53.704ms 200 application/javascript
+2018-11-09 17:01:41.436 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/favicon.ico  
+2018-11-09 17:01:41.437 +03:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\favicon.ico'
+2018-11-09 17:01:41.437 +03:00 [INF] Request finished in 1.1901ms 200 image/x-icon
+2018-11-09 17:01:46.182 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/lib/bootstrap/dist/js/bootstrap.js  
+2018-11-09 17:01:46.186 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/js/site.js?v=dLGP40S79Xnx6GqUthRF6NWvjvhQ1nOvdVSwaNcgG18  
+2018-11-09 17:01:46.186 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2018-11-09 17:01:46.186 +03:00 [INF] Request finished in 3.982ms 200 application/javascript
+2018-11-09 17:01:46.186 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\Projects\aspnet-core-epam\Northwind.Web\wwwroot\js\site.js'
+2018-11-09 17:01:46.186 +03:00 [INF] Request finished in 0.5204ms 200 application/javascript
+2018-11-09 17:01:55.866 +03:00 [INF] Max cached files check started.
+2018-11-09 17:01:55.873 +03:00 [INF] Max cached files check finished.
+2018-11-09 17:02:25.872 +03:00 [INF] Max cached files check started.
+2018-11-09 17:02:25.872 +03:00 [INF] Max cached files check finished.
