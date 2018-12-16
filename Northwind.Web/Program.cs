@@ -21,7 +21,7 @@ namespace Northwind
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
-                
+
             ConfigureLogging(config);
             try
             {
@@ -42,8 +42,8 @@ namespace Northwind
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog();
+                .UseSerilog()
+                .UseStartup<Startup>();
 
 
         private static void ConfigureLogging(IConfigurationRoot config) {

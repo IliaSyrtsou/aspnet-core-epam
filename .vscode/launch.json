@@ -9,7 +9,7 @@
            "type": "coreclr",
            "request": "launch",
            "preLaunchTask": "build",
-           "program": "${workspaceRoot}/Northwind.Clients.Console/bin/Debug/netcoreapp2.1/Northwind.Clients.Console.dll",
+           "program": "${workspaceRoot}/Northwind.Clients.Console/bin/Debug/netcoreapp2.2/Northwind.Clients.Console.dll",
            "args": [],
            "cwd": "${workspaceRoot}",
            "stopAtEntry": true,
@@ -21,7 +21,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Northwind.Web/bin/Debug/netcoreapp2.1/Northwind.Web.dll",
+            "program": "${workspaceFolder}/Northwind.Web/bin/Debug/netcoreapp2.2/Northwind.Web.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Northwind.Web",
             "stopAtEntry": false,

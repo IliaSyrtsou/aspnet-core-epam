@@ -10,7 +10,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Northwind.Web.Pages.Products;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Northwind.Web.Tests.Controllers
 {

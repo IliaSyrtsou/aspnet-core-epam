@@ -72,7 +72,6 @@ namespace Northwind.Web.Controllers.Api
                 ModelState.AddModelError("ProductId", $"Product not found with id={productId.Value}");
                 return NotFound(ModelState);
             }
-            
             _productService.Update(_mapper.Map<Product>(updatedProduct));
             _productService.SaveChanges();
 
@@ -84,7 +83,7 @@ namespace Northwind.Web.Controllers.Api
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            
+
             var product = _mapper.Map<Product>(newProduct);
             _productService.Add(product);
             _productService.SaveChanges();
@@ -105,7 +104,7 @@ namespace Northwind.Web.Controllers.Api
                 ModelState.AddModelError("ProductId", $"Product not found with id={productId.Value}");
                 return NotFound(ModelState);
             }
-            
+
             _productService.Remove(product);
             _productService.SaveChanges();
 
