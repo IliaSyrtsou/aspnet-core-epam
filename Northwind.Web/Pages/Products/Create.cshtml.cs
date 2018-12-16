@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Entities;
 using Northwind.Web.Models;
 using Northwind.Services.Interfaces;

@@ -21,7 +21,7 @@ namespace Northwind.Web.Controllers.Api {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel model, string returnUrl = null)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model, [FromQuery] string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
@@ -35,13 +35,13 @@ namespace Northwind.Web.Controllers.Api {
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
+                        "/Auth/ConfirmEmail",
                         pageHandler: null,
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
@@ -53,20 +53,21 @@ namespace Northwind.Web.Controllers.Api {
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            return Ok();
         }
 
-        public async Task<IActionResult> Login(LoginModel loginModel, [FromQuery] string returnUrl = null)
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel, [FromQuery] string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, 
+                // To enable password failures to trigger account lockout,
                 // set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, 
-                    Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(loginModel.UserName,
+                    loginModel.Password, loginModel.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -75,7 +76,7 @@ namespace Northwind.Web.Controllers.Api {
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl,
-                        RememberMe = Input.RememberMe });
+                        RememberMe = loginModel.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
@@ -85,11 +86,12 @@ namespace Northwind.Web.Controllers.Api {
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    return BadRequest(ModelState);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            return BadRequest();
         }
     }
+}

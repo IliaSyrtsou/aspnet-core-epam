@@ -7,7 +7,7 @@ namespace Northwind.Web.Components
     {
         public async Task<IViewComponentResult> InvokeAsync() {
             var breadcrumbs = new BreadcrumbsModel($"Home{Request.Path.ToString()}");
-            return View(breadcrumbs);
+            return await Task.FromResult(View(breadcrumbs));
         }
     }
 

@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,17 +23,21 @@ namespace Northwind
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration,
-                        ILogger logger)
+        public Startup(IHostingEnvironment env, IConfiguration config,
+            ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
-            Logger = logger;
+            Environment = env;
+            Configuration = config;
+            LoggerFactory = loggerFactory;
         }
+
+        public IHostingEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
-        public ILogger Logger { get; }
+        public ILoggerFactory LoggerFactory { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var logger = LoggerFactory.CreateLogger<Startup>();
             services.AddDbContext<NorthwindDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
@@ -43,20 +47,20 @@ namespace Northwind
 
             services.AddSingleton<IConfiguration>(Configuration);
 
-            SmtpClientConfiguration.ConfigureSmtpClient(services, Configuration, Logger);
+            SmtpClientConfiguration.ConfigureSmtpClient(services, Configuration, logger);
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             services.AddHostedService<TrackMaxCachedImagesService>();
             services.AddAutoMapper();
-            IdentityConfiguration.ConfigureIdentity(services);
-            
+            // IdentityConfiguration.ConfigureIdentity(services);
+
             services.AddMvc(options => {
                 options.Filters.Add<LoggingActionFilter>();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             SwaggerConfiguration.AddSwaggerGen(services);
 
@@ -81,7 +85,6 @@ namespace Northwind
             app.UseImageCache();
             SwaggerConfiguration.UseSwagger(app);
             app.UseMvc();
-            
         }
     }
 }

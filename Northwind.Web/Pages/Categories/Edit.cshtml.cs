@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Northwind.Entities;
 using Northwind.Web.Models;
 using Northwind.Services.Interfaces;
@@ -69,7 +68,7 @@ namespace Northwind.Web.Pages.Categories {
                     Buffer.BlockCopy(fileBytes, 0, pictureBytes, randomBytes.Length, fileBytes.Length);
                     category.Picture = pictureBytes;
                 }
-                
+
                 _categoryService.Update(category);
                 _categoryService.SaveChanges ();
                 return RedirectToAction ("Index", "Categories");
