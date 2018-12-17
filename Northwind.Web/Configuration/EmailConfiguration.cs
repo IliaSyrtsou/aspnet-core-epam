@@ -14,11 +14,11 @@ namespace Northwind.Web.Configuration
     public static class SmtpClientConfiguration
     {
         public static void ConfigureSmtpClient(
-                IServiceCollection services, 
+                IServiceCollection services,
                 IConfiguration config,
                 ILogger logger) {
-            services.AddScoped<SmtpClient>((serviceProvider) =>  
-            {  
+            services.AddScoped<SmtpClient>((serviceProvider) =>
+            {
                 var host = config.GetValue<String>("Email:Smtp:Host");
                 var port = config.GetValue<int>("Email:Smtp:Port");
                 var userName = config.GetValue<String>("Email:Smtp:Username");
@@ -29,16 +29,16 @@ namespace Northwind.Web.Configuration
                     String.IsNullOrWhiteSpace(userName) ||
                     String.IsNullOrWhiteSpace(password))
                 {
-                    logger.LogError("Smtp configuration is invalid.");    
+                    logger.LogError("Smtp configuration is invalid.");
                 }
 
                 return new SmtpClient()
-                {  
-                    Host = host,  
-                    Port = port,  
-                    Credentials = new NetworkCredential(userName, password)  
-                };  
-            });  
+                {
+                    Host = host,
+                    Port = port,
+                    Credentials = new NetworkCredential(userName, password)
+                };
+            });
         }
     }
 }

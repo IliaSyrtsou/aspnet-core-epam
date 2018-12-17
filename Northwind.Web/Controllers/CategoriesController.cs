@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Northwind.Web.Controllers {
     [Route ("[controller]/[action]")]
@@ -18,6 +19,7 @@ namespace Northwind.Web.Controllers {
 
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
+        [Authorize]
         public IActionResult Index () {
             var categories = this._categoriesService.GetAll().ToList();
             return View(categories);

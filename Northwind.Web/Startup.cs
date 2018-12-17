@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,8 @@ using Northwind.Web.BackgroundTasks;
 using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
+
 
 namespace Northwind
 {
@@ -41,13 +44,17 @@ namespace Northwind
             services.AddDbContext<NorthwindDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
             DIConfiguration.RegisterFilters(services);
             DIConfiguration.RegisterServices(services);
             DIConfiguration.RegisterRepository(services);
 
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddAutoMapper();
 
             SmtpClientConfiguration.ConfigureSmtpClient(services, Configuration, logger);
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -55,8 +62,27 @@ namespace Northwind
             });
 
             services.AddHostedService<TrackMaxCachedImagesService>();
-            services.AddAutoMapper();
-            // IdentityConfiguration.ConfigureIdentity(services);
+
+            IdentityConfiguration.ConfigureIdentity(services, Configuration);
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = "Cookies";
+                    options.DefaultChallengeScheme = "oidc";
+                })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.SignInScheme = "Cookies";
+
+                    options.Authority = "http://localhost:5010";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ClientId = "northwind";
+                    options.SaveTokens = true;
+                });
 
             services.AddMvc(options => {
                 options.Filters.Add<LoggingActionFilter>();
@@ -78,13 +104,15 @@ namespace Northwind
                 app.UseHsts();
             }
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
-            app.UseHttpsRedirection();
+                builder.WithOrigins("http://localhost:5010").AllowAnyHeader().AllowAnyMethod());
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseImageCache();
             SwaggerConfiguration.UseSwagger(app);
+            app.UseAuthentication();
             app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
