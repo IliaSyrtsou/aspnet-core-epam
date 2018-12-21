@@ -22,37 +22,43 @@ namespace Northwind.IdentityServer
         {
             return new List<Client>
             {
-                // // OpenID Connect implicit flow client (MVC)
-                // new Client
-                // {
-                //     ClientId = "mvc",
-                //     ClientName = "MVC Client",
-                //     AllowedGrantTypes = GrantTypes.Implicit,
+                // OpenID Connect implicit flow client (MVC)
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
 
-                //     // where to redirect to after login
-                //     RedirectUris = { "http://localhost:5000/signin-oidc" },
+                    // where to redirect to after login
+                    RedirectUris = { "http://localhost:5030/signin-oidc" },
 
-                //     // where to redirect to after logout
-                //     PostLogoutRedirectUris = { "http://localhost:5000/signout-callback-oidc" },
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "http://localhost:5030/signout-callback-oidc" },
 
-                //     AllowedScopes = new List<string>
-                //     {
-                //         IdentityServerConstants.StandardScopes.OpenId,
-                //         IdentityServerConstants.StandardScopes.Profile
-                //     }
-                // },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
                 // OpenID Connect implicit flow client (Northwind.Web)
                 new Client
                 {
                     ClientId = "northwind",
                     ClientName = "Northwind Web",
                     AllowedGrantTypes = GrantTypes.Implicit,
+                    RequireConsent = false,
+                    // RequireClientSecret = false,
+
+                    // ClientSecrets =
+                    // {
+                    //     new Secret("secret".Sha256())
+                    // },
 
                     // where to redirect to after login
-                    RedirectUris = { "http://localhost:5000/signin-oidc" },
-
+                    RedirectUris = { "https://localhost:5001/signin-oidc" },
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { "http://localhost:5000/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:5001/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
@@ -68,7 +74,7 @@ namespace Northwind.IdentityServer
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
+                new IdentityResources.Profile()
             };
         }
 

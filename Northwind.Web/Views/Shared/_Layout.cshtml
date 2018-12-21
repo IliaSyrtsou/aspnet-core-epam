@@ -39,6 +39,9 @@
                         <li><a href="/Home/Index">Home</a></li>
                         <li><a href="/Products/Index">Products</a></li>
                         <li><a href="/Categories/Index">Categories</a></li>
+                        @if(Context.User.Identity.IsAuthenticated) {
+                            <li><a href="/api/auth/logout">Log out</a></li>
+                        }
                     </ul>
                 </div>
             </div>

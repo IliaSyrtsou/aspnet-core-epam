@@ -72,7 +72,7 @@ namespace Northwind.Web.Controllers.Api {
                 ModelState.AddModelError (string.Empty, $"Image is too large. Max size is {Int32.MaxValue} bytes");
                 return BadRequest (ModelState);
             }
-            
+
             var exists = this._categoryService
                 .GetAll ()
                 .Any (x => x.CategoryId.Equals (categoryId));

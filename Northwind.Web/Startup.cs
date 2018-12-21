@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
-
+using IdentityServer4.Models;
 
 namespace Northwind
 {
@@ -57,13 +57,16 @@ namespace Northwind
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddHostedService<TrackMaxCachedImagesService>();
 
             IdentityConfiguration.ConfigureIdentity(services, Configuration);
+            services.AddMvc(options => {
+                options.Filters.Add<LoggingActionFilter>();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -76,17 +79,12 @@ namespace Northwind
                 .AddOpenIdConnect("oidc", options =>
                 {
                     options.SignInScheme = "Cookies";
-
-                    options.Authority = "http://localhost:5010";
+                    options.Authority = "https://localhost:5011";
                     options.RequireHttpsMetadata = false;
-
+                    // options.ClientSecret = new Secret("secret".Sha256()).Value;
                     options.ClientId = "northwind";
                     options.SaveTokens = true;
                 });
-
-            services.AddMvc(options => {
-                options.Filters.Add<LoggingActionFilter>();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             SwaggerConfiguration.AddSwaggerGen(services);
 
@@ -111,8 +109,8 @@ namespace Northwind
             app.UseImageCache();
             SwaggerConfiguration.UseSwagger(app);
             app.UseAuthentication();
-            app.UseMvc();
             app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }

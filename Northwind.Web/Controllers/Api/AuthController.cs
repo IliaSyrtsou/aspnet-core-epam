@@ -1,23 +1,24 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Northwind.Web.Models.Api;
 
 namespace Northwind.Web.Controllers.Api {
-    [Route ("[controller]/[action]")]
-    public class AuthController : Controller {
+    [Route ("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase {
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
         private ILogger _logger;
 
         public AuthController(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
-            ILogger logger) {
-            _logger = logger;
-            _userManager = userManager;
-            _signInManager = signInManager;
+            // SignInManager<IdentityUser> signInManager,
+            // UserManager<IdentityUser> userManager,
+            ) {
+            // _userManager = userManager;
+            // _signInManager = signInManager;
         }
 
         [HttpPost]
@@ -92,6 +93,13 @@ namespace Northwind.Web.Controllers.Api {
 
             // If we got this far, something failed, redisplay form
             return BadRequest();
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout(){
+            await HttpContext.SignOutAsync("Cookies");
+            await HttpContext.SignOutAsync("oidc");
+            return Redirect("/Products");
         }
     }
 }
