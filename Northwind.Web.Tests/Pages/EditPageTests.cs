@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Northwind.Web.Models;
 using Northwind.Web.Profiles;
 using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Northwind.Web.Tests.Controllers
 {

@@ -21,6 +21,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
 using IdentityServer4.Models;
+using Northwind.Common;
 
 namespace Northwind
 {
@@ -67,6 +68,8 @@ namespace Northwind
             services.AddMvc(options => {
                 options.Filters.Add<LoggingActionFilter>();
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 

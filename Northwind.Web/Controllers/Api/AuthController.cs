@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -96,10 +97,24 @@ namespace Northwind.Web.Controllers.Api {
         }
 
         [HttpGet("logout")]
-        public async Task<IActionResult> Logout(){
+        public async Task Logout(){
+            await HttpContext.SignOutAsync("Cookies");
+            var prop = new AuthenticationProperties()
+            {
+                RedirectUri = "/Products"
+            };
+            // after signout this will redirect to your provided target
+            await HttpContext.SignOutAsync("oidc", prop);
+        }
+        
+        [HttpGet("login")]
+        public async Task Login(){
             await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("oidc");
-            return Redirect("/Products");
+            await HttpContext.ChallengeAsync("oidc", 
+                new AuthenticationProperties() {
+                    RedirectUri = "/Products",
+                });
         }
     }
 }

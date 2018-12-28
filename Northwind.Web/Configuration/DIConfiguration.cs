@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Northwind.Common;
 using Northwind.Repository;
 using Northwind.Services;
 using Northwind.Services.Interfaces;
@@ -12,6 +14,7 @@ namespace Northwind.Web.Configuration
             config.AddScoped<ICategoryService, CategoryService>();
             config.AddScoped<ISupplierService, SupplierService>();
             config.AddScoped<IProductService, ProductService>();
+            config.AddSingleton<IEmailSender, EmailSender>();
         }
 
         public static void RegisterRepository(IServiceCollection config) {

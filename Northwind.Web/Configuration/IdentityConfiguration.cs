@@ -15,7 +15,7 @@ namespace Northwind.Web.Configuration
         public static void ConfigureIdentity(IServiceCollection services, IConfiguration config) {
             services.AddDbContext<NorthwindIdentityDbContext>(options =>
                     options.UseSqlServer(
-                        config.GetConnectionString("Northwind")));
+                        config.GetConnectionString("IS4_AspNetIdentity")));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<NorthwindIdentityDbContext>();

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Northwind.Web.Pages.Products;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Northwind.Web.Tests.Controllers
 {

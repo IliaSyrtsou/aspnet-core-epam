@@ -34,7 +34,7 @@ namespace Northwind.IdentityServer
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://localhost:5030/signout-callback-oidc" },
-
+                    
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

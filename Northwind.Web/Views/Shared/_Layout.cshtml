@@ -42,6 +42,11 @@
                         @if(Context.User.Identity.IsAuthenticated) {
                             <li><a href="/api/auth/logout">Log out</a></li>
                         }
+                        else
+                        {
+                            <li><a href="/api/auth/login">Log in</a></li>
+                            <li><a href="/Auth/Register">Register</a></li>
+                        }
                     </ul>
                 </div>
             </div>
